@@ -8,3 +8,7 @@ monitoring.openincubator.tech {
 		erwan JDJhJDE0JHE0S3BpYmF4QXVEM1B4Y2RhS2NwTU9KdjZwOW9wcnhsSGpMZ1ZFcUNvSXAzUnJQa016QlhH
 	}	
 }
+
+kanban.openincubator.tech {
+	reverse_proxy localhost:5002
+}
