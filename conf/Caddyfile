@@ -1,3 +1,10 @@
 openincubator.tech {
 	reverse_proxy localhost:5000
 }
+
+monitoring.openincubator.tech {
+	reverse_proxy localhost:5001
+	basicauth /* {
+		erwan JDJhJDE0JHE0S3BpYmF4QXVEM1B4Y2RhS2NwTU9KdjZwOW9wcnhsSGpMZ1ZFcUNvSXAzUnJQa016QlhH
+	}	
+}
