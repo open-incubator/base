@@ -1,0 +1,20 @@
+version: '3.0'
+services:
+  portainer:
+    image: portainer/portainer:latest
+    command: -H unix:///var/run/docker.sock
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer:/data
+    ports:
+      - 5003:9000
+    labels:
+    - "user=root"
+#  templates:
+#    image: portainer/templates
+#    volumes:
+#      - ./configs/templates:/usr/share/nginx/html
+#    networks:
+#      - local
+volumes:
+  portainer:
