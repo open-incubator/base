@@ -9,22 +9,21 @@ Docker-based system to deploy our infrastructure 🏗️
 ### How to use
 
 1. Clone the repository
-2. Create the acme storage file with `touch acme.json a&& chmod 600 acme.json`
+2. Install dependencies with the `requirements.sh` script
 3. Run `docker-compose up -d`
 4. Clone, build & run all projects with `.utils/startall.sh`
+5. Start services one per one
 
 ### How to add projects
 
-Add the traefik router label to the service in the `docker-compose.yml` file of the projetc. For example : `- traefik.frontend.rule=Host:openincubator.tech`
-and add it into the `traefik-net` network with these lines: 
-
+Add the service to the caddy network
 ```yml
 networks:
-  proxy:
-    external:
-      name: "traefik-net"
+  caddynet:
+    external: true
 ```
 
+And edit the `conf/Caddyfile` to reverse proxy the service
 ### Example
 
 This is an example of a docker-compose file for the [homepage](https://github.com/open-incubator/open-incubator.github.io) :
@@ -37,14 +36,19 @@ services:
     ports:
         - "5000:80"
     networks:
-        - proxy
-    labels:
-        - traefik.frontend.rule=Host:openincubator.tech
+        - caddynet
 
 networks:
-  proxy:
-    external:
-      name: "traefik-net"
+  caddynet:
+    external: true
+```
+
+And the Caddyfile part :
+
+```
+openincubator.tech {
+    reverse_proxy localhost:5000
+}
 ```
 
 ### Utils scripts
