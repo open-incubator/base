@@ -1,0 +1,42 @@
+
+version: "3"
+
+services:
+  db:
+    image: armv7/armhf-mysql:5.5.44
+    command: --max-allowed-packet=64MB
+    restart: always
+    volumes:
+      - db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=toor
+    env_file:
+      - ./db.env
+    networks:
+      - matomo
+
+  app:
+    image: matomo
+    restart: always
+    volumes:
+#     - ./config:/var/www/html/config
+#     - ./logs:/var/www/html/logs
+      - matomo:/var/www/html
+    environment:
+      - MATOMO_DATABASE_HOST=db
+      - VIRTUAL_HOST=
+    env_file:
+      - ./db.env
+    ports:
+      - 5004:80
+    networks:
+      - matomo
+      - caddynet
+
+networks:
+  matomo:
+  caddynet:
+    external: true
+volumes:
+  db:
+  matomo:
