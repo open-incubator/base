@@ -16,3 +16,7 @@ kanban.openincubator.tech {
 hub.openincubator.tech {
 	reverse_proxy localhost:5003
 }
+
+analytics.openincubator.tech {
+	reverse_proxy localhost:5004
+}

@@ -5,9 +5,14 @@ services:
     ports:
       - "5002:80"
       - "4433:443"
+    networks:
+      - caddynet
     volumes:
       - kanboard_data:/var/www/app/data
       - kanboard_plugins:/var/www/app/plugins
 volumes:
   kanboard_data:
   kanboard_plugins:
+networks:
+  caddynet:
+    external: true

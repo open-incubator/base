@@ -14,7 +14,10 @@ services:
 #    image: portainer/templates
 #    volumes:
 #      - ./configs/templates:/usr/share/nginx/html
-#    networks:
-#      - local
+    networks:
+      - caddynet
 volumes:
   portainer:
+networks:
+  caddynet:
+    external: true

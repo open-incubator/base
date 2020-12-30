@@ -9,8 +9,13 @@ services:
       - SYS_PTRACE
     security_opt:
       - apparmor:unconfined
+    networks:
+      - caddynet
     volumes:
       - /etc/passwd:/host/etc/passwd:ro
       - /etc/group:/host/etc/group:ro
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro
+networks:
+  caddynet:
+    external: true
